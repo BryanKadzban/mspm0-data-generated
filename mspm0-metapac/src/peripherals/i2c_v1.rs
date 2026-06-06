@@ -2757,17 +2757,19 @@ pub mod vals {
         #[doc = "Timeout B Event."]
         TIMEOUTB = 0x10,
         #[doc = "Interrupt overflow event."]
-        INTR_OVFL = 0x20,
-        _RESERVED_21 = 0x21,
+        INTR_OVFL = 0x11, // 0x20 in hardware
+        _UNASSIGNED = 0x12,
     }
     impl CpuIntIidxStat {
         #[inline(always)]
         pub const fn from_bits(val: u8) -> CpuIntIidxStat {
             unsafe {
-                core::mem::transmute(if val <= 0x10 || val == 0x20 {
+                core::mem::transmute(if val <= 0x10 {
                     val
+                } else if val == 0x21 {
+                    0x11
                 } else {
-                    0x21
+                    0x12
                 })
             }
         }
