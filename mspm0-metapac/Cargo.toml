@@ -11,6 +11,7 @@ include = [
 
 [dependencies]
 cortex-m = "0.7.7"
+defmt = "1.0"
 
 [dependencies.cortex-m-rt]
 version = "0.7.3"

@@ -2721,7 +2721,7 @@ pub mod vals {
         }
     }
     #[repr(u8)]
-    #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+    #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, defmt::Format)]
     pub enum CpuIntIidxStat {
         #[doc = "No interrupt pending."]
         NO_INTR = 0x0,
