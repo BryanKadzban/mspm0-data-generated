@@ -2756,36 +2756,6 @@ pub mod vals {
         TIMEOUTA = 0x0f,
         #[doc = "Timeout B Event."]
         TIMEOUTB = 0x10,
-        #[doc = "Target Data Event."]
-        TRXDONEFG = 0x11,
-        #[doc = "Target Data Event."]
-        TTXDONEFG = 0x12,
-        #[doc = "Target receive FIFO Trigger Level."]
-        TRXFIFOTRG = 0x13,
-        #[doc = "Target transmit FIFO Trigger level."]
-        TTXFIFOTRG = 0x14,
-        #[doc = "RX FIFO FULL Event/interrupt pending."]
-        TRXFIFOFULL = 0x15,
-        #[doc = "Transmit FIFO/Buffer Empty Event/interrupt pending."]
-        TTXEMPTY = 0x16,
-        #[doc = "Start Event."]
-        TSTARTFG = 0x17,
-        #[doc = "Stop Event."]
-        TSTOPFG = 0x18,
-        #[doc = "General Call Event."]
-        TGENCALL = 0x19,
-        #[doc = "DMA DONE on Channel TX."]
-        TDMA_DONE_TX = 0x1a,
-        #[doc = "DMA DONE on Channel RX."]
-        TDMA_DONE_RX = 0x1b,
-        #[doc = "Target PEC receive error event."]
-        TPEC_RX_ERR = 0x1c,
-        #[doc = "Target TX FIFO underflow."]
-        TTX_UNFL = 0x1d,
-        #[doc = "Target RX FIFO overflow event."]
-        TRX_OVFL = 0x1e,
-        #[doc = "Target arbitration lost event."]
-        TARBLOST = 0x1f,
         #[doc = "Interrupt overflow event."]
         INTR_OVFL = 0x20,
         _RESERVED_21 = 0x21,
@@ -2793,7 +2763,13 @@ pub mod vals {
     impl CpuIntIidxStat {
         #[inline(always)]
         pub const fn from_bits(val: u8) -> CpuIntIidxStat {
-            unsafe { core::mem::transmute(if val <= 0x20 { val } else { 0x21 }) }
+            unsafe {
+                core::mem::transmute(if val <= 0x10 || val == 0x20 {
+                    val
+                } else {
+                    0x21
+                })
+            }
         }
         #[inline(always)]
         pub const fn to_bits(self) -> u8 {
