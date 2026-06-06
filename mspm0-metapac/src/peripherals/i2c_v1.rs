@@ -2788,12 +2788,12 @@ pub mod vals {
         TARBLOST = 0x1f,
         #[doc = "Interrupt overflow event."]
         INTR_OVFL = 0x20,
-        _RESERVED_ff = 0xff,
+        _RESERVED_21 = 0x21,
     }
     impl CpuIntIidxStat {
         #[inline(always)]
         pub const fn from_bits(val: u8) -> CpuIntIidxStat {
-            unsafe { core::mem::transmute(if val <= 0x20 { val } else { 0xff }) }
+            unsafe { core::mem::transmute(if val <= 0x20 { val } else { 0x21 }) }
         }
         #[inline(always)]
         pub const fn to_bits(self) -> u8 {
